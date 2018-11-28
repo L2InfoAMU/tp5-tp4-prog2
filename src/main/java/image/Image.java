@@ -1,6 +1,6 @@
 package image;
 
-import javafx.scene.paint.Color;
+import java.awt.*;
 
 /**
  * Created by Arnaud Labourel on 09/11/2018.
