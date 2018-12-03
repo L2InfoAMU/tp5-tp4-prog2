@@ -1,85 +1,65 @@
 package image;
-
-import java.awt.*;
+import javafx.scene.paint.Color;
 
 import static util.Matrices.requiresNonNull;
 import static util.Matrices.requiresNonZeroDimensions;
 
 public class BruteRasterImage implements Image {
-    private Color[][] pixels;
-    private int width;
-    private int height;
+
+    private Color[][] pixels ;
+    private int width ,height ;
+
 
     public BruteRasterImage(Color color, int width, int height){
-        this.width=width;
-        this.height=height;
+        this.width = width ;
+        this.height = height ;
         this.createRepresentation();
-        for(int index=0;index < width;index++){
-            for(int j=0;j < height;j++){
-                this.pixels[index][j] = color;
+        for(int x = 0 ;x < width ; x++){
+            for(int y = 0 ; y < height ; y++ ){
+                pixels[x][y] = color ;
             }
         }
     }
-
     public BruteRasterImage(Color[][] colors){
-        this.createRepresentation();
-        requiresNonNull(pixels);
-        requiresNonNull(colors);
-        requiresNonZeroDimensions(pixels);
-        requiresNonZeroDimensions(colors);
-        for(int index=0;index < width;index++){
-            for(int j=0;j < height;j++){
-                this.pixels[index][j] = colors[index][j];
-            }
-        }
-    }
-
-    public void createRepresentation(){
-        this.pixels= new Color[this.getWidth()][this.getHeight()];
-    }
-
-    public Color getPixelColor(int x, int y) {
-        return this.pixels[x][y];
-    }
-
-    public void setPixelColor(Color color, int x, int y) {
-        this.pixels[x][y]=color;
-    }
-
-    private void setPixelColor(Color[][] pixels) {
         requiresNonNull(this.pixels);
         requiresNonNull(pixels);
         requiresNonZeroDimensions(this.pixels);
         requiresNonZeroDimensions(pixels);
-        for(int index=0;index < width;index++){
-            for(int j=0;j < height;j++){
-                this.pixels[index][j] = pixels[index][j];
-            }
-        }
-    }
+        pixels = colors.clone();
+        this.width = colors.length ;
+        this.height = colors[0].length ;
 
-    private void setPixelsColor(Color color){
+
+    }
+    public void createRepresentation(){
+        pixels = new Color[width][height];
+
+    }
+    public void setPixelColor(Color color, int x, int y){
+        pixels[x][y] = color ;
+    }
+    public Color getPixelColor(int x, int y){
+        return pixels[x][y];
+    }
+    private void setPixelsColor(Color[][] pixels){
+        requiresNonNull(this.pixels);
+        requiresNonNull(pixels);
+        requiresNonZeroDimensions(this.pixels);
         requiresNonZeroDimensions(pixels);
-        for(int index=0;index < width;index++){
-            for(int j=0;j < height;j++){
-                this.pixels[index][j] = color;
-            }
-        }
+        this.pixels = pixels ;
+        this.width = pixels.length ;
+        this.height = pixels[0].length ;
     }
-
-    public int getWidth() {
-        return this.width;
+    public int getHeight(){
+        return this.height ;
     }
-
-    public int getHeight() {
-        return this.height;
+    public int getWidth(){
+        return this.width ;
     }
-
     protected void setWidth(int width) {
-        this.width=width;
+        this.width = width ;
     }
-
-    protected void setHeight(int height) {
-        this.height=height;
+    protected void setHeight(int height){
+        this.height = height ;
     }
 }
