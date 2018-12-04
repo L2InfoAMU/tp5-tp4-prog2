@@ -2,6 +2,9 @@ package image;
 
 import java.awt.*;
 
+import static util.Matrices.requiresNonNull;
+import static util.Matrices.requiresNonZeroDimensions;
+
 public class PaletteRasterImage implements Image{
     private int width;
     private int height;
@@ -35,20 +38,46 @@ public class PaletteRasterImage implements Image{
 
 
     }
-    public void setPixelColor(Color color, int x, int y){
 
+    public void createRepresentation(){
+        pixels = new int[width][height];
+    }
+
+    public void setPixelColor(Color color, int x, int y){
         for(int index=0;index < 3;index++) {
             if (color == colors[index])
                 pixels[x][y] = index;
         }
 
     }
+    public Color getPixelColor(int x, int y){
 
-    @Override
-    public javafx.scene.paint.Color getPixelColor(int x, int y) {
-        return null;
+            for(int index = 0 ; index < 3 ; index ++){
+                if(pixels[x][y] == index) {
+                    return colors[index];
+                }
+            }
+            throw new ArithmeticException("/ aucune couleur");
+
     }
 
+    private void setPixelsColor(Color[][] pixels) {
+        requiresNonNull(pixels);
+        requiresNonZeroDimensions(pixels);
+        for(int x = 0 ; x < width ; x++){
+            for(int y = 0 ; y < height ; y++){
+                this.setPixelColor(pixels[x][y],x,y);
+            }
+        }
+
+    }
+    private void setPixelsColor(Color color){
+        for(int x = 0 ; x < width ; x++){
+            for(int y = 0 ; y < height ; y++){
+                this.setPixelColor(color,x,y);
+            }
+        }
+    }
     @Override
     public int getWidth() {
         return width;
@@ -57,5 +86,13 @@ public class PaletteRasterImage implements Image{
     @Override
     public int getHeight() {
         return height;
+    }
+
+    protected void setWidth(int width){
+        this.width=width;
+    }
+
+    protected void setHeight(int height){
+        this.height=height;
     }
 }
