@@ -21,10 +21,10 @@ public class BruteRasterImage implements Image {
         }
     }
     public BruteRasterImage(Color[][] colors){
-        requiresNonNull(this.pixels);
-        requiresNonNull(pixels);
-        requiresNonZeroDimensions(this.pixels);
-        requiresNonZeroDimensions(pixels);
+        //requiresNonNull(this.pixels);
+        //requiresNonNull(colors);
+        //requiresNonZeroDimensions(this.pixels);
+        //requiresNonZeroDimensions(colors);
         pixels = colors.clone();
         this.width = colors.length ;
         this.height = colors[0].length ;
