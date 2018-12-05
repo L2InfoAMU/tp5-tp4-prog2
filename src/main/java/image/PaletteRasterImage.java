@@ -1,6 +1,8 @@
 package image;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
+
+import java.util.List;
 
 import static util.Matrices.requiresNonNull;
 import static util.Matrices.requiresNonZeroDimensions;
@@ -8,13 +10,13 @@ import static util.Matrices.requiresNonZeroDimensions;
 public class PaletteRasterImage implements Image{
     private int width;
     private int height;
-    Color[] colors = {Color.red , Color.blue , Color.white} ;
-    int[][] pixels ;
+    private List<Color> Palette= List.of(Color.RED,Color.BLUE,Color.WHITE);
+    private int[][] pixels ;
 
     public PaletteRasterImage(Color color, int width, int height){
         int colorNumber = 0 ;
         for(int index = 0 ; index < 3 ; index++){
-            if (color == colors[index])
+            if (color == Palette.get(index))
                 colorNumber = index ;
 
         }
@@ -28,6 +30,8 @@ public class PaletteRasterImage implements Image{
 
     public PaletteRasterImage(Color[][] pixels){
 
+        requiresNonNull(pixels);
+        requiresNonZeroDimensions(pixels);
         this.width = pixels.length ;
         this.height = pixels[0].length ;
         for(int x = 0 ; x < width ; x++){
@@ -45,7 +49,7 @@ public class PaletteRasterImage implements Image{
 
     public void setPixelColor(Color color, int x, int y){
         for(int index=0;index < 3;index++) {
-            if (color == colors[index])
+            if (color == Palette.get(index))
                 pixels[x][y] = index;
         }
 
@@ -54,7 +58,7 @@ public class PaletteRasterImage implements Image{
 
             for(int index = 0 ; index < 3 ; index ++){
                 if(pixels[x][y] == index) {
-                    return colors[index];
+                    return Palette.get(index);
                 }
             }
             throw new ArithmeticException("/ aucune couleur");
