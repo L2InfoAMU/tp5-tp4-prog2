@@ -1,16 +1,13 @@
 package image;
 
 import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static util.Matrices.requiresNonNull;
 import static util.Matrices.requiresNonZeroDimensions;
 
-public class PaletteRasterImage implements Image{
-    private int width;
-    private int height;
+
+public class PaletteRasterImage extends RasterImage {
     private List<Color> palette;
     private int[][] indexOfColor ;
 
@@ -73,21 +70,5 @@ public class PaletteRasterImage implements Image{
             }
         }
     }
-    @Override
-    public int getWidth() {
-        return width;
-    }
 
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    protected void setWidth(int width){
-        this.width=width;
-    }
-
-    protected void setHeight(int height){
-        this.height=height;
-    }
 }
