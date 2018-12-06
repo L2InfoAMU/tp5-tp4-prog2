@@ -1,8 +1,8 @@
 package image;
 
 public abstract class RasterImage implements Image{
-    int width;
-    int height;
+    private int width;
+    private int height;
     public int getHeight(){
         return this.height ;
     }

@@ -8,8 +8,8 @@ public class BruteRasterImage extends RasterImage {
     private Color[][] pixels ;
 
     public BruteRasterImage(Color color, int width, int height){
-        this.width = width ;
-        this.height = height ;
+        setWidth(width);
+        setHeight(height);
         this.createRepresentation();
         for(int x = 0 ;x < width ; x++){
             for(int y = 0 ; y < height ; y++ ){
@@ -22,14 +22,14 @@ public class BruteRasterImage extends RasterImage {
         requiresNonNull(colors);
         requiresNonZeroDimensions(colors);
         pixels = colors.clone();
-        this.width = colors.length ;
-        this.height = colors[0].length ;
+        setWidth(colors.length);
+        setHeight(colors[0].length);
 
 
     }
 
     public void createRepresentation(){
-        pixels = new Color[width][height];
+        pixels = new Color[getWidth()][getHeight()];
 
     }
 
@@ -47,8 +47,8 @@ public class BruteRasterImage extends RasterImage {
         requiresNonZeroDimensions(this.pixels);
         requiresNonZeroDimensions(pixels);
         this.pixels = pixels ;
-        this.width = pixels.length ;
-        this.height = pixels[0].length ;
+        setWidth(pixels.length);
+        setHeight(pixels[0].length);
     }
 
 }
