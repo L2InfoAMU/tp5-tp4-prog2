@@ -12,8 +12,7 @@ public class PaletteRasterImage extends RasterImage {
     private int[][] indexOfColor ;
 
     public PaletteRasterImage(Color color, int width, int height){
-        setWidth(width);
-        setHeight(height);
+        super(width,height);
         this.createRepresentation();
         for(int x = 0 ; x < getWidth() ; x++){
             for(int y = 0 ; y < getHeight() ; y++){
@@ -23,11 +22,9 @@ public class PaletteRasterImage extends RasterImage {
     }
 
     public PaletteRasterImage(Color[][] pixels){
-
+        super(pixels.length,pixels[0].length);
         requiresNonNull(pixels);
         requiresNonZeroDimensions(pixels);
-        setWidth(pixels.length);
-        setHeight(pixels[0].length);
         this.createRepresentation();
         for(int x = 0 ; x < getWidth() ; x++){
             for(int y = 0 ; y < getHeight() ; y++){
