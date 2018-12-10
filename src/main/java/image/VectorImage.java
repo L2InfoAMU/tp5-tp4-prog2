@@ -19,12 +19,23 @@ public class VectorImage implements Image{
         for(int index = 0;index < shapes.size();index++){
             for(int x = 0;x < width;x++){
                 for(int y = 0;y < height;y++){
+                    int indexTmp=index;
                     if(shapes.get(index).contains(new Point(x,y))){
-                        pixels[x][y] = shapes.get(index).getColor();
+                        if(pixels[x][y]==null)
+                            pixels[x][y] = shapes.get(index).getColor();
+                        else
+                            while(this.getPixelColor(x,y)!= shapes.get(indexTmp).getColor()){
+                                indexTmp--;
+                            }
+                            pixels[x][y] = shapes.get(indexTmp).getColor();
                     }
-                    if(pixels[x][y] == null)
-                        pixels[x][y] = Color.WHITE;
                 }
+            }
+        }
+        for(int x = 0;x < width;x++){
+            for(int y = 0;y < height;y++){
+                if(pixels[x][y] == null)
+                    pixels[x][y] = Color.WHITE;
             }
         }
     }
